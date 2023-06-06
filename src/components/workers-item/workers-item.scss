@@ -1,0 +1,58 @@
+.workers-item {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1fr 0.3fr 0.8fr;
+  padding: 15px 20px;
+  border: 1px solid #4454691e;
+  border-radius: 5px;
+  &__salary {
+    text-align: center;
+  }
+  &__box {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 5px;
+  }
+  &__btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    width: 35px;
+    height: 35px;
+    margin: 3px;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    .fa-star {
+      width: 35px;
+      height: 35px;
+      text-align: center;
+      line-height: 35px;
+      font-size: 16px;
+      color: #ffd700;
+      transition: 0.3s all;
+      transform: translateX(30px);
+      opacity: 0;
+      transition: all 0.2s;
+      &_show {
+        transform: translateX(0px);
+        opacity: 1;
+      }
+    }
+    .fa-cookie {
+      color: #e09f3e;
+    }
+    .fa-trash {
+      color: #e5383b;
+    }
+    &_tra {
+      background-color: transparent;
+    }
+  }
+}
+.increase {
+  color: #e09f3e;
+}

@@ -1,0 +1,16 @@
+.search-panel {
+  background-color: #43597e;
+  margin-top: 20px;
+  border-radius: 5px;
+  padding: 20px;
+  &__input {
+    display: block;
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+    padding: 10px 20px;
+    &:focus {
+      outline: none;
+    }
+  }
+}

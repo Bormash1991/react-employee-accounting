@@ -1,0 +1,14 @@
+.workers-info {
+  background-color: #43597e;
+  padding: 20px;
+  color: white;
+  font-weight: 500;
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-radius: 5px;
+  &__record {
+    font-size: 30px;
+  }
+}
