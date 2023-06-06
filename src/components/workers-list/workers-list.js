@@ -1,12 +1,8 @@
 import WorkersItem from "../workers-item/workers-item";
 import "./workers-list.scss";
-const WorkersList = () => {
-  const data = [
-    { name: "Bohdan", salary: 800, increase: false, id: 1, stared: false },
-    { name: "Anna", salary: 1000, increase: true, id: 2, stared: true },
-  ];
-  const elements = data.map((worker) => (
-    <WorkersItem key={worker.id} {...worker} />
+const WorkersList = ({ data, onDelete }) => {
+  const elements = data.map(({ id, ...workerData }) => (
+    <WorkersItem onDelete={() => onDelete(id)} key={id} {...workerData} />
   ));
   return <ul className="workers-list">{elements}</ul>;
 };

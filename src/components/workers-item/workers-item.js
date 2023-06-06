@@ -19,7 +19,7 @@ class WorkersItem extends Component {
     }));
   };
   render() {
-    const { name, salary } = this.props;
+    const { name, salary, onDelete } = this.props;
     let itemClass = "workers-item ";
     const { increase, stared } = this.state;
     let starClass = "fas fa-star fa-star_show";
@@ -39,7 +39,7 @@ class WorkersItem extends Component {
           <button onClick={this.changeIncrease} className="workers-item__btn">
             <i className="fas fa-cookie"></i>
           </button>
-          <button className="workers-item__btn">
+          <button onClick={onDelete} className="workers-item__btn">
             <i className="fas fa-trash"></i>
           </button>
           <button className="workers-item__btn  workers-item__btn_tra">
