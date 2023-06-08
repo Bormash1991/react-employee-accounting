@@ -1,8 +1,15 @@
 import WorkersItem from "../workers-item/workers-item";
 import "./workers-list.scss";
-const WorkersList = ({ data, onDelete }) => {
+const WorkersList = ({ data, onDelete, toggleParams }) => {
   const elements = data.map(({ id, ...workerData }) => (
-    <WorkersItem onDelete={() => onDelete(id)} key={id} {...workerData} />
+    <WorkersItem
+      onDelete={() => onDelete(id)}
+      toggleParams={(e) => {
+        return toggleParams(id, e.currentTarget.getAttribute("data-toggle"));
+      }}
+      key={id}
+      {...workerData}
+    />
   ));
   return <ul className="workers-list">{elements}</ul>;
 };

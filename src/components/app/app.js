@@ -20,11 +20,21 @@ class App extends Component {
   }
   deleteWorker = (id) => {
     this.setState(({ data }) => ({
-      data: data.filter((elem) => elem.id != id),
+      data: data.filter((elem) => elem.id !== id),
     }));
   };
-  addWorker = (e, { name, salary }) => {
-    e.preventDefault();
+  toggleParams = (id, param) => {
+    this.setState(({ data }) => ({
+      data: data.map((worker) => {
+        if (worker.id === id) {
+          return { ...worker, [param]: !worker[param] };
+        }
+        return worker;
+      }),
+    }));
+  };
+
+  addWorker = (name, salary) => {
     const newWorker = {
       name,
       salary,
@@ -36,20 +46,23 @@ class App extends Component {
       data: [...data, newWorker],
     }));
   };
-  changeIncrease = (id) => {
-    this.setState(({ data }) => {
-      const index = data.findIndex((elem) => elem.id == id);
-    });
-  };
   render() {
+    const workers = this.state.data.length;
+    const increasedWorkers = this.state.data.filter(
+      (worker) => worker.increase
+    ).length;
     return (
       <div className="app">
-        <WorkersInfo />
+        <WorkersInfo workers={workers} increasedWorkers={increasedWorkers} />
         <div className="search-panel">
           <SearchPanel />
           <WorkersFilter />
         </div>
-        <WorkersList onDelete={this.deleteWorker} data={this.state.data} />
+        <WorkersList
+          onDelete={this.deleteWorker}
+          toggleParams={this.toggleParams}
+          data={this.state.data}
+        />
         <AddForm onAdd={this.addWorker} />
       </div>
     );

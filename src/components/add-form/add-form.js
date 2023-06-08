@@ -11,13 +11,22 @@ class AddForm extends Component {
   onValueChanges = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
+  onSubmit = (e) => {
+    e.preventDefault();
+    if (this.state.name.length < 3 || !this.state.salary) return;
+    this.props.onAdd(this.state.name, this.state.salary);
+    this.setState({
+      name: "",
+      salary: "",
+    });
+  };
   render() {
     const { name, salary } = this.state;
-    const { onAdd } = this.props;
+
     return (
       <div className="add-form">
         <h3 className="add-form__title">Додайте нового співробітника</h3>
-        <form className="add-form__form">
+        <form onSubmit={(e) => this.onSubmit(e)} className="add-form__form">
           <input
             value={name}
             name="name"
@@ -34,10 +43,7 @@ class AddForm extends Component {
             placeholder="З/П в $"
             className="add-form__input"
           />
-          <button
-            onClick={(e) => onAdd(e, { name, salary })}
-            className="add-form__btn"
-          >
+          <button type="submit" className="add-form__btn">
             Додати
           </button>
         </form>
