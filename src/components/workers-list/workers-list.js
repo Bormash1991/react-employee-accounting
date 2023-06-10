@@ -4,9 +4,9 @@ const WorkersList = ({ data, onDelete, toggleParams }) => {
   const elements = data.map(({ id, ...workerData }) => (
     <WorkersItem
       onDelete={() => onDelete(id)}
-      toggleParams={(e) => {
-        return toggleParams(id, e.currentTarget.getAttribute("data-toggle"));
-      }}
+      toggleParams={(e) =>
+        toggleParams(id, e.currentTarget.getAttribute("data-toggle"))
+      }
       key={id}
       {...workerData}
     />

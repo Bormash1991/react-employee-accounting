@@ -16,6 +16,8 @@ class App extends Component {
         { name: "Anna", salary: 1000, increase: true, id: 2, stared: true },
         { name: "Anna L.", salary: 1500, increase: false, id: 3, stared: true },
       ],
+      search: "",
+      filter: "",
     };
   }
   deleteWorker = (id) => {
@@ -46,22 +48,51 @@ class App extends Component {
       data: [...data, newWorker],
     }));
   };
+  processingSearch = (data, value) => {
+    if (!value) {
+      return data;
+    }
+    return data.filter(
+      ({ name }) => name.toLowerCase().indexOf(value.toLowerCase()) > -1
+    );
+  };
+  processingFilter = (data, value) => {
+    switch (value) {
+      case "increase":
+        return data.filter((worker) => worker.increase);
+      case "more":
+        return data.filter((worker) => worker.salary >= 1000);
+      default:
+        return data;
+    }
+  };
+  onUpdateSearch = (search) => {
+    this.setState({ search });
+  };
+  onChooseFilter = (filter) => {
+    this.setState({ filter });
+  };
   render() {
+    const { data, search, filter } = this.state;
     const workers = this.state.data.length;
     const increasedWorkers = this.state.data.filter(
       (worker) => worker.increase
     ).length;
+    const visibleData = this.processingFilter(
+      this.processingSearch(data, search),
+      filter
+    );
     return (
       <div className="app">
         <WorkersInfo workers={workers} increasedWorkers={increasedWorkers} />
         <div className="search-panel">
-          <SearchPanel />
-          <WorkersFilter />
+          <SearchPanel onUpdateSearch={this.onUpdateSearch} />
+          <WorkersFilter onChooseFilter={this.onChooseFilter} />
         </div>
         <WorkersList
           onDelete={this.deleteWorker}
           toggleParams={this.toggleParams}
-          data={this.state.data}
+          data={visibleData}
         />
         <AddForm onAdd={this.addWorker} />
       </div>
